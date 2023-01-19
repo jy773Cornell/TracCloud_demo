@@ -3,5 +3,5 @@ from USER import models
 
 
 def test(request):
-    models.UserType.objects.create(TypeName="growrterer", isDelete=False)
+    models.UserType.objects.filter(TypeName="grower").delete()
     return HttpResponse("1")

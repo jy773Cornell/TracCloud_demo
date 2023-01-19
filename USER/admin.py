@@ -4,13 +4,13 @@ from utils.UUIDGen import gen_uuid
 
 
 class UserTypeAdmin(admin.ModelAdmin):
-    list_display = ('UTID', 'TypeName', 'InfoDataTable', 'isDelete',)
+    list_display = ('UTID', 'TypeName', 'InfoDataTable', 'Valid',)
 
-    list_filter = ('isDelete',)
+    list_filter = ('Valid',)
 
     list_per_page = 10
 
-    list_editable = ('TypeName', 'InfoDataTable', 'isDelete',)
+    list_editable = ('TypeName', 'InfoDataTable', 'Valid',)
 
     exclude = ["UTID"]
 

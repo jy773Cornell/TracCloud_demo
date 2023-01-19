@@ -1,8 +1,19 @@
 from django.db import models
+from django.db.models.manager import BaseManager
+
 from utils.UUIDGen import gen_uuid
 
 
-class MyModelManager(models.Manager):
+class MyQuerySet(models.query.QuerySet):
+
+    # Override the delete method to a logic deletion,
+    # which only sets invalid status instead of deleting data form database
+    def delete(self):
+        del_query = self._chain()
+        del_query.update(Valid=False)
+
+
+class MyModelManager(BaseManager.from_queryset(MyQuerySet)):
     prefix = ""
 
     def prefix(self, prefix):

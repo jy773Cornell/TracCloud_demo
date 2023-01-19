@@ -28,7 +28,7 @@ class User(models.Model):
     AddedBy = models.ForeignKey(verbose_name="Added By", to="User", to_field="UID", null=True, blank=True,
                                 on_delete=models.SET_NULL)
     SelfActivated = models.BooleanField(verbose_name="Self Activated Status")
-    isDelete = models.BooleanField(verbose_name="Delete Status", default=False)
+    Valid = models.BooleanField(verbose_name="Valid Status", default=True)
 
     objects = MyModelManager()
     objects.prefix("UID")
@@ -42,7 +42,7 @@ class UserType(models.Model):
     UTID = models.CharField(verbose_name="UTID", primary_key=True, max_length=48)
     TypeName = models.CharField(verbose_name="Type Name", unique=True, max_length=128)
     InfoDataTable = models.CharField(verbose_name="Info Data Table", null=True, blank=True, max_length=256)
-    isDelete = models.BooleanField(verbose_name="Delete Status", default=False)
+    Valid = models.BooleanField(verbose_name="Valid Status", default=True)
 
     objects = MyModelManager()
     objects.prefix("UTID")
