@@ -1,6 +1,5 @@
 from django.db import models
 from django.db.models.manager import BaseManager
-
 from utils.UUIDGen import gen_uuid
 
 
