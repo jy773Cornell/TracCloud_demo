@@ -17,12 +17,19 @@ from django.contrib import admin
 from django.urls import path, re_path
 from django.conf import settings
 from django.views.static import serve
-import USER.views
+import USER.views as user
+import ACCOUNT.views as account
 
 urlpatterns = [
     re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}, name='media'),
 
     path('admin/', admin.site.urls),
 
-    path('test/', USER.views.test),
+    path('login/', account.login),
+    path('logout/', account.logout),
+    path('image/code/', account.image_code),
+
+
+
+
 ]

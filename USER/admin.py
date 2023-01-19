@@ -5,72 +5,72 @@ from utils.encrypt import md5
 
 
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('UID', 'Username', 'Type', 'BusinessName', 'RegistrationNo', 'RegExpireDate', 'AddedBy',
-                    'SelfActivated', 'Valid',)
+    list_display = ('uid', 'username', 'type', 'business_name',
+                    'added_by', 'self_activated', 'is_active', 'create_time',)
 
-    list_filter = ('Type', 'SelfActivated', 'Valid',)
+    list_filter = ('type', 'self_activated', 'is_active',)
 
     list_per_page = 10
 
-    list_editable = ('SelfActivated', 'Valid',)
+    list_editable = ('self_activated', 'is_active',)
 
-    exclude = ["UID"]
+    exclude = ["uid"]
 
     def save_model(self, request, obj, form, change):
         if not change:
-            obj.UID = gen_uuid("UID")
-            obj.Password = md5(form.instance.Password)
+            obj.uid = gen_uuid("UID")
+            obj.password = md5(form.instance.password)
         super().save_model(request, obj, form, change)
 
 
 class UserTypeAdmin(admin.ModelAdmin):
-    list_display = ('UTID', 'TypeName', 'InfoDataTable', 'Valid',)
+    list_display = ('utid', 'type_name', 'info_data_table', 'is_active', 'create_time',)
 
-    list_filter = ('Valid',)
+    list_filter = ('is_active',)
 
     list_per_page = 10
 
-    list_editable = ('TypeName', 'InfoDataTable', 'Valid',)
+    list_editable = ('type_name', 'info_data_table', 'is_active',)
 
-    exclude = ["UTID"]
+    exclude = ["utid"]
 
     def save_model(self, request, obj, form, change):
         if not change:
-            obj.UTID = gen_uuid("UTID")
+            obj.utid = gen_uuid("UTID")
         super().save_model(request, obj, form, change)
 
 
 class UserRelationAdmin(admin.ModelAdmin):
-    list_display = ('URID', 'Requester', 'Provider', 'RelationType', 'AddedBy', 'Valid',)
+    list_display = ('urid', 'requester', 'provider', 'relation_type', 'added_by', 'is_active', 'create_time',)
 
-    list_filter = ('RelationType', 'Valid',)
+    list_filter = ('relation_type', 'is_active',)
 
     list_per_page = 10
 
-    list_editable = ('Valid',)
+    list_editable = ('is_active',)
 
     exclude = ["URID"]
 
     def save_model(self, request, obj, form, change):
         if not change:
-            obj.URID = gen_uuid("URID")
+            obj.urid = gen_uuid("URID")
         super().save_model(request, obj, form, change)
 
 
 class UserRelationTypeAdmin(admin.ModelAdmin):
-    list_display = ('URTID', 'TypeName', 'Note', 'Valid',)
+    list_display = ('urtid', 'type_name', 'note', 'is_active', 'create_time',)
 
-    list_filter = ('Valid',)
+    list_filter = ('is_active',)
 
     list_per_page = 10
 
-    list_editable = ('TypeName', 'Note', 'Valid',)
+    list_editable = ('type_name', 'note', 'is_active',)
 
-    exclude = ["URTID"]
+    exclude = ["urtid"]
 
     def save_model(self, request, obj, form, change):
         if not change:
-            obj.URTID = gen_uuid("URTID")
+            obj.urtid = gen_uuid("URTID")
         super().save_model(request, obj, form, change)
 
 
