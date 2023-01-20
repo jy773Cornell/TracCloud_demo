@@ -62,12 +62,18 @@
 <script src="{% static 'plugins/bootstrap-3.4.1/js/bootstrap.min.js' %}"></script>
 <script type="text/javascript">
     $(function () {
-        imgRefreshEvent();
+        imgRefresh();
+        imgClickRefreshEvent();
         loginBtnEvent();
         createBtnEvent();
     })
 
-    function imgRefreshEvent() {
+    function imgRefresh() {
+        var ran = Math.random();
+        $("#image_code").attr('src', '/image/code/?' + ran)
+    }
+
+    function imgClickRefreshEvent() {
         $('#image_code').click(function () {
             var ran = Math.random();
             $(this).attr('src', '/image/code/?' + ran)
@@ -91,6 +97,7 @@
                             $.each(res.errors, function (name, data) {
                                 $("#id_" + name).next().text(data[0])
                             })
+                            imgRefresh();
                         }
                     }
                 })

@@ -2,8 +2,6 @@ from django.db import models
 from utils.ModelManager import MyModelManager
 
 
-# User
-
 class User(models.Model):
     uid = models.CharField(verbose_name="UID", primary_key=True, max_length=48)
 
@@ -39,8 +37,6 @@ class User(models.Model):
         return "{} ({})".format(self.username, self.type)
 
 
-# User Type
-
 class UserType(models.Model):
     utid = models.CharField(verbose_name="UTID", primary_key=True, max_length=48)
     type_name = models.CharField(verbose_name="Type Name", unique=True, max_length=128)
@@ -55,8 +51,6 @@ class UserType(models.Model):
         return self.type_name
 
 
-# User Relation
-
 class UserRelation(models.Model):
     urid = models.CharField(verbose_name="URID", primary_key=True, max_length=48)
     requester = models.ForeignKey(verbose_name="Requester", to="User", to_field="uid", related_name="requester",
@@ -67,7 +61,7 @@ class UserRelation(models.Model):
                                       related_name="relationtype", null=True, blank=True, on_delete=models.SET_NULL)
     added_by = models.ForeignKey(verbose_name="Added By", to="User", to_field="uid", related_name="relation_added_by",
                                  null=True, blank=True, on_delete=models.SET_NULL)
-    is_active = models.BooleanField(verbose_name="Is Active", default=True)
+    is_active = models.BooleanField(verbose_name="Is Active", default=False)
     create_time = models.DateTimeField(verbose_name="Create Time", auto_now=True)
 
     objects = MyModelManager()
@@ -76,8 +70,6 @@ class UserRelation(models.Model):
     def __str__(self):
         return "Relation: {}, Requester: {}, Provider: {}".format(self.relation_type, self.requester, self.provider)
 
-
-# User Relation Type
 
 class UserRelationType(models.Model):
     urtid = models.CharField(verbose_name="URTID", primary_key=True, max_length=48)
