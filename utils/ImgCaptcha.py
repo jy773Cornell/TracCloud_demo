@@ -27,7 +27,7 @@ from PIL import Image, ImageDraw, ImageFont, ImageFilter
 
 # Generate image captcha
 
-def img_captcha(width=160, height=40, char_length=8, font_file='kumo.ttf', font_size=32):
+def img_captcha(width=160, height=40, char_length=5, font_file='kumo.ttf', font_size=32):
     code = []
     img = Image.new(mode='RGB', size=(width, height), color=(255, 255, 255))
     draw = ImageDraw.Draw(img, mode='RGB')

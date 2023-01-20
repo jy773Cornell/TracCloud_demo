@@ -21,15 +21,22 @@ import USER.views as user
 import ACCOUNT.views as account
 
 urlpatterns = [
+    # Media files
+
     re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}, name='media'),
+
+    # Admin center
 
     path('admin/', admin.site.urls),
 
-    path('login/', account.login),
-    path('logout/', account.logout),
+    # Account login & logout
+
+    path('login/', account.user_login),
+    path('logout/', account.user_logout),
     path('image/code/', account.image_code),
 
+    # User center
 
-
+    path('user/center/<str:uid>/', user.user_center),
 
 ]

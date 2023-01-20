@@ -18,28 +18,28 @@
     </style>
 </head>
 <body>
-<form method="post" novalidate>
+<form id="loginForm" method="post" novalidate>
     {% csrf_token %}
     <div class="container-fluid clearfix">
         <div>
-            <h1 class="btn-default text-center">Trac Cloud Login</h1>
+            <h1 class="text-center">Trac Cloud</h1>
         </div>
         <div class="form-group">
             <label>{{ form.username.label }}: </label>
             {{ form.username }}
-            <span style="color:red">{{ form.username.errors.0 }}</span>
+            <span class="error_msg" style="color:red">{{ form.username.errors.0 }}</span>
         </div>
         <div class="form-group">
             <label>{{ form.password.label }}: </label>
             {{ form.password }}
-            <span style="color:red">{{ form.password.errors.0 }}</span>
+            <span class="error_msg" style="color:red">{{ form.password.errors.0 }}</span>
         </div>
         <div class="form-group">
             <label for="id_code">{{ form.code.label }}</label>
             <div class="row">
                 <div class="col-xs-7">
                     {{ form.code }}
-                    <span style="color: red;">{{ form.code.errors.0 }}</span>
+                    <span class="error_msg" style="color: red;">{{ form.code.errors.0 }}</span>
                 </div>
                 <div class="col-xs-5">
                     <img id="image_code" class="img-rounded" style="cursor: pointer" src="/image/code/">
@@ -49,19 +49,63 @@
                 </div>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary">Login</button>
-        <button type="submit" class="btn btn-success" style="margin-left: 20px">Create an account</button>
+        <button id="loginBtn" class="btn btn-primary" type="button">
+            Login
+        </button>
+        <button id="createBtn" class="btn btn-success" type="button" style="margin-left: 20px">
+            Create an account
+        </button>
     </div>
 </form>
 
 <script src="{% static 'js/jquery-3.6.3.min.js' %}"></script>
 <script src="{% static 'plugins/bootstrap-3.4.1/js/bootstrap.min.js' %}"></script>
 <script type="text/javascript">
+    $(function () {
+        imgRefreshEvent();
+        loginBtnEvent();
+        createBtnEvent();
+    })
 
-    $('#image_code').on('click', function () {
-        var ran = Math.random();
-        $(this).attr('src','/image/code/?'+ ran)
-    });
+    function imgRefreshEvent() {
+        $('#image_code').click(function () {
+            var ran = Math.random();
+            $(this).attr('src', '/image/code/?' + ran)
+        });
+    }
+
+    function loginBtnEvent() {
+        $('#loginBtn').click(function () {
+
+                $(".error_msg").empty();
+
+                $.ajax({
+                    url: '/login/',
+                    type: 'post',
+                    data: $("#loginForm").serialize(),
+                    dataType: "JSON",
+                    success: function (res) {
+                        if (res.status) {
+                            location.href = res.url;
+                        } else {
+                            $.each(res.errors, function (name, data) {
+                                $("#id_" + name).next().text(data[0])
+                            })
+                        }
+                    }
+                })
+            }
+        )
+        ;
+    }
+
+    function createBtnEvent() {
+        $('#createBtn').on('click', function () {
+            var ran = Math.random();
+            $(this).attr('src', '/image/code/?' + ran)
+        });
+    }
+
 </script>
 
 </body>

@@ -1,7 +1,7 @@
 from django.contrib import admin
 from USER.models import User, UserType, UserRelation, UserRelationType
 from utils.UUIDGen import gen_uuid
-from utils.encrypt import md5
+from django.contrib.auth.hashers import make_password
 
 
 class UserAdmin(admin.ModelAdmin):
@@ -19,7 +19,7 @@ class UserAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
         if not change:
             obj.uid = gen_uuid("UID")
-            obj.password = md5(form.instance.password)
+            obj.password = make_password(form.instance.password)
         super().save_model(request, obj, form, change)
 
 
