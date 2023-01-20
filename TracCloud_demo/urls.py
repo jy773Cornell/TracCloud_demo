@@ -29,10 +29,11 @@ urlpatterns = [
 
     path('admin/', admin.site.urls),
 
-    # Account login & logout
+    # Account login & logout & account creation
 
     path('login/', account.user_login),
     path('logout/', account.user_logout),
+    path('create/account/', account.user_create),
     path('image/code/', account.image_code),
 
     # User center

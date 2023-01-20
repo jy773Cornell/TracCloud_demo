@@ -20,7 +20,6 @@ class MyModelManager(BaseManager.from_queryset(MyQuerySet)):
         self.prefix = prefix
 
     def create(self, **obj_data):
-
         # Create UUID with prefix as the primary key
 
         obj_data[self.prefix] = gen_uuid(self.prefix)

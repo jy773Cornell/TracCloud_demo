@@ -11,7 +11,7 @@ class User(models.Model):
                              null=True, blank=True, on_delete=models.SET_NULL)
 
     name = models.CharField(verbose_name="Actual Name", max_length=64)
-    business_name = models.CharField(verbose_name="Business Name", max_length=256)
+    business_name = models.CharField(verbose_name="Business Name", null=True, blank=True, max_length=256)
     registration_no = models.CharField(verbose_name="Registration No.", null=True, blank=True, max_length=128)
     reg_expire_date = models.DateField(verbose_name="Registration Expire Date", null=True, blank=True)
     address = models.CharField(verbose_name="Address", null=True, blank=True, max_length=256)
