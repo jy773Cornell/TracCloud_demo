@@ -3,23 +3,22 @@
     <div class="container">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">Profile</h3>
+                <h3 class="panel-title">{{ request.session.info.username }} ({{ request.session.info.type }})</h3>
             </div>
             <div class="panel-body">
-                <form method="post" novalidate>
-                    {% csrf_token %}
+                <form id="profileForm" method="post" novalidate>
                     <div class="row">
-                        {% for field in form %}
+                        {% for field in profile_form %}
                             <div class="form-group col-md-4">
                                 <label>{{ field.label }}</label>
                                 {{ field }}
-                                <span style="color:red;">{{ field.errors.0 }}</span>
+                                <span class="error_msg" style="color:red;">{{ field.errors.0 }}</span>
                             </div>
                         {% endfor %}
                     </div>
                 </form>
                 <div id="readOnlyBtns" style="float:right; visibility:visible;">
-                    <button id="editBtn" type="button" class="btn btn-success btn-sm" style="margin-left: 10px;">
+                    <button id="editBtn" type="button" class="btn btn-success btn-sm" style="">
                         Edit
                     </button>
                     <button id="changeBtn" type="button" class="btn btn-primary btn-sm" style="margin-left: 10px;">
@@ -29,13 +28,57 @@
                         Delete Account
                     </button>
                 </div>
-                <div id="editModelBtns" style="float:right; visibility:hidden;">
-                    <button id="saveBtn" type="button" class="btn btn-success btn-sm" style="margin-left: 10px;">
+                <div id="editModelBtns" style="float:left; visibility:hidden;">
+                    <button id="editSaveBtn" type="button" class="btn btn-success btn-sm" style="">
                         Save
                     </button>
-                    <button id="cancelBtn" type="button" class="btn btn-default btn-sm" style="margin-left: 10px;">
+                    <button id="editCancelBtn" type="button" class="btn btn-default btn-sm" style="margin-left: 10px;">
                         Cancel
                     </button>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="changeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="myModalLabel">Change Password</h3>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-2">
+                            </div>
+                            <div class="col-md-8">
+                                <form id="changePasswordForm" novalidate>
+                                    {% for field in password_form %}
+                                        <div class="form-group">
+                                            <label>{{ field.label }}</label>
+                                            {{ field }}
+                                            <span class="error_msg" style="color:red;">{{ field.errors.0 }}</span>
+                                        </div>
+                                    {% endfor %}
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button id="changeConfirmBtn" type="button" class="btn btn-primary">Confirm</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <h4>Confirm to delete?</h4>
+                    <p style="margin: 10px 0px;">
+                        <strong>Warning!</strong> Better check! All related data will be deleted!
+                    </p>
+                    <p style="text-align: right">
+                        <button id="btnConfirmDelete" type="button" class="btn btn-danger">YES</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">NO</button>
+                    </p>
                 </div>
             </div>
         </div>
@@ -48,15 +91,17 @@
         $(function () {
             enterEditSubmit();
             editBtnEvent();
-            cancelBtnEvent();
+            editCancelBtnEvent();
+            editSaveBtnEvent();
             changeBtnEvent();
+            ChangeConfirmBtnEvent();
             deleteBtnEvent();
         })
 
         function enterEditSubmit() {
-            $("#loginForm .form-input").keypress(function (key_code) {
+            $("#profileForm .form-input").keypress(function (key_code) {
                 if (key_code.which == 13) {
-                    $("#loginBtn").click();
+                    $("#saveBtn").click();
                 }
             });
         }
@@ -74,19 +119,83 @@
             });
         }
 
-        function cancelBtnEvent() {
-            $('#cancelBtn').click(function () {
-                document.getElementById('readOnlyBtns').style.visibility = "visible";
-                document.getElementById('editModelBtns').style.visibility = "hidden";
-                inputList = document.getElementsByClassName("form-input");
-                if (inputList) {
-                    for (var x = 0; x < inputList.length; x++) {
-                        inputList[x].disabled = true;
-                    }
-                }
+        function editCancelBtnEvent() {
+            $('#editCancelBtn').click(function () {
+                location.reload();
             });
         }
 
+        function editSaveBtnEvent() {
+            $('#editSaveBtn').click(function () {
+
+                $("#profileForm .error_msg").empty();
+
+                $.ajax({
+                    url: '/user/edit/',
+                    type: 'post',
+                    data: $("#profileForm").serialize(),
+                    dataType: "JSON",
+                    success: function (res) {
+                        if (res.status) {
+                            location.href = res.url;
+                        } else {
+                            $.each(res.errors, function (name, data) {
+                                $("#id_" + name).next().text(data[0])
+                            })
+                        }
+                    }
+                })
+            });
+        }
+
+        function changeBtnEvent() {
+            $('#changeBtn').click(function () {
+                $("#changeModal .error_msg").empty();
+                $("#changePasswordForm")[0].reset();
+                $('#changeModal').modal("show");
+            });
+        }
+
+        function ChangeConfirmBtnEvent() {
+            $('#changeConfirmBtn').click(function () {
+
+                $("#changeModal .error_msg").empty();
+
+                $.ajax({
+                    url: '/user/password/change/',
+                    type: 'post',
+                    data: $("#changePasswordForm").serialize(),
+                    dataType: "JSON",
+                    success: function (res) {
+                        if (res.status) {
+                            location.href = res.url;
+                        } else {
+                            $.each(res.errors, function (name, data) {
+                                $("#id_" + name).next().text(data[0])
+                            })
+                        }
+                    }
+                })
+            });
+        }
+
+        function deleteBtnEvent() {
+            $('#deleteBtn').click(function () {
+
+                $.ajax({
+                    url: '/account/delete/',
+                    type: 'get',
+                    success: function (res) {
+                        if (res.status) {
+                            location.href = res.url;
+                        } else {
+                            alert(res.errors);
+                            location.reload();
+                        }
+                    }
+                })
+            });
+        }
 
     </script>
 {% endblock %}

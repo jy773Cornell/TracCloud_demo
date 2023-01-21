@@ -19,7 +19,6 @@
 </head>
 <body>
 <form id="loginForm" method="post" novalidate>
-    {% csrf_token %}
     <div class="container-fluid clearfix">
         <div>
             <h1 class="text-center">Trac Cloud</h1>
@@ -147,7 +146,7 @@
             $("#loginForm .error_msg").empty();
 
             $.ajax({
-                url: '/login/',
+                url: '/login/submit/',
                 type: 'post',
                 data: $("#loginForm").serialize(),
                 dataType: "JSON",

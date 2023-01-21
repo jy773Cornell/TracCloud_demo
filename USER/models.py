@@ -10,7 +10,7 @@ class User(models.Model):
     type = models.ForeignKey(verbose_name="User Type", to="UserType", to_field="utid", related_name="user_type",
                              null=True, blank=True, on_delete=models.SET_NULL)
 
-    name = models.CharField(verbose_name="Actual Name", max_length=64)
+    name = models.CharField(verbose_name="Actual Name", null=True, blank=True, max_length=64)
     business_name = models.CharField(verbose_name="Business Name", null=True, blank=True, max_length=256)
     registration_no = models.CharField(verbose_name="Registration No.", null=True, blank=True, max_length=128)
     reg_expire_date = models.DateField(verbose_name="Registration Expire Date", null=True, blank=True)
@@ -53,10 +53,10 @@ class UserType(models.Model):
 
 class UserRelation(models.Model):
     urid = models.CharField(verbose_name="URID", primary_key=True, max_length=48)
-    requester = models.ForeignKey(verbose_name="Requester", to="User", to_field="uid", related_name="requester",
+    requester = models.ForeignKey(verbose_name="Requester", to="User", to_field="uid", related_name="requester_user",
                                   null=True, blank=True, on_delete=models.SET_NULL)
-    provider = models.ForeignKey(verbose_name="Provider", to="User", to_field="uid", related_name="provider", null=True,
-                                 blank=True, on_delete=models.SET_NULL)
+    provider = models.ForeignKey(verbose_name="Provider", to="User", to_field="uid", related_name="provider_user",
+                                 null=True, blank=True, on_delete=models.SET_NULL)
     relation_type = models.ForeignKey(verbose_name="Relation Type", to="UserRelationType", to_field="urtid",
                                       related_name="relationtype", null=True, blank=True, on_delete=models.SET_NULL)
     added_by = models.ForeignKey(verbose_name="Added By", to="User", to_field="uid", related_name="relation_added_by",

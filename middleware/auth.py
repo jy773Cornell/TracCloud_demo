@@ -5,7 +5,7 @@ from USER.models import User
 
 class AuthMiddleware(MiddlewareMixin):
     def process_request(self, request):
-        if request.path_info in ["/login/", "/image/code/", "/account/create/"]:
+        if request.path_info in ["/login/", "/login/submit/", "/account/create/", "/image/code/", ]:
             return
 
         info_dict = request.session.get("info")

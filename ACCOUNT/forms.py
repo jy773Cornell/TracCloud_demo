@@ -57,8 +57,6 @@ class UserCreateForm(BootStrapModelForm):
 
     def clean_password(self):
         password = self.cleaned_data.get("password")
-        # if len(password) < 8:
-        #     raise ValidationError("Please enter a password of at least eight characters.")
         return make_password(password)
 
     def clean_confirm_password(self):

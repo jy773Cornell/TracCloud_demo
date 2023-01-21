@@ -32,13 +32,17 @@ urlpatterns = [
     # Account login & logout & account creation
 
     path('login/', account.account_login),
-    path('logout/', account.account_logout),
+    path('login/submit/', account.account_login_submit),
     path('account/create/', account.account_create),
+    path('logout/', account.account_logout),
+    path('account/delete/', account.account_delete),
     path('image/code/', account.image_code),
 
     # User center
 
     path('user/center/', user.user_center),
     path('user/profile/', user.user_profile),
+    path('user/edit/', user.user_edit),
+    path('user/password/change/', user.user_password_change),
 
 ]
