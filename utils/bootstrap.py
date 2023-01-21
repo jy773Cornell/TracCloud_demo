@@ -20,7 +20,33 @@ class BootStrap:
                 field.widget.attrs = {"class": "form-input form-control", "placeholder": field.label}
 
 
+class BootStrapReadOnly:
+    bootstrap_exclude_fields = []
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        for name, field in self.fields.items():
+            if name in self.bootstrap_exclude_fields:
+                continue
+
+            if field.widget.attrs:
+                field.widget.attrs["class"] = "form-input form-control"
+                field.widget.attrs["placeholder"] = field.label
+                field.widget.attrs["disabled"] = True
+            else:
+                field.widget.attrs = {
+                    "class": "form-input form-control",
+                    "placeholder": field.label,
+                    "disabled": True,
+                }
+
+
 class BootStrapModelForm(BootStrap, forms.ModelForm):
+    pass
+
+
+class BootStrapReadOnlyModelForm(BootStrapReadOnly, forms.ModelForm):
     pass
 
 

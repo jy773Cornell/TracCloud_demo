@@ -144,27 +144,25 @@
     function loginBtnEvent() {
         $('#loginBtn').click(function () {
 
-                $("#loginForm .error_msg").empty();
+            $("#loginForm .error_msg").empty();
 
-                $.ajax({
-                    url: '/login/',
-                    type: 'post',
-                    data: $("#loginForm").serialize(),
-                    dataType: "JSON",
-                    success: function (res) {
-                        if (res.status) {
-                            location.href = res.url;
-                        } else {
-                            $.each(res.errors, function (name, data) {
-                                $("#id_" + name).next().text(data[0])
-                            })
-                            imgRefresh();
-                        }
+            $.ajax({
+                url: '/login/',
+                type: 'post',
+                data: $("#loginForm").serialize(),
+                dataType: "JSON",
+                success: function (res) {
+                    if (res.status) {
+                        location.href = res.url;
+                    } else {
+                        $.each(res.errors, function (name, data) {
+                            $("#id_" + name).next().text(data[0])
+                        })
+                        imgRefresh();
                     }
-                })
-            }
-        )
-        ;
+                }
+            })
+        });
     }
 
     function createBtnEvent() {

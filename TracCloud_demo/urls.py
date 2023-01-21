@@ -39,5 +39,6 @@ urlpatterns = [
     # User center
 
     path('user/center/', user.user_center),
+    path('user/profile/', user.user_profile),
 
 ]

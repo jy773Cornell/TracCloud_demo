@@ -1,0 +1,93 @@
+{% extends "user_center_layout.html" %}
+{% block content %}'
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Profile</h3>
+            </div>
+            <div class="panel-body">
+                <form method="post" novalidate>
+                    {% csrf_token %}
+                    <div class="row">
+                        {% for field in form %}
+                            <div class="form-group col-md-4">
+                                <label>{{ field.label }}</label>
+                                {{ field }}
+                                <span style="color:red;">{{ field.errors.0 }}</span>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </form>
+                <div id="readOnlyBtns" style="float:right; visibility:visible;">
+                    <button id="editBtn" type="button" class="btn btn-success btn-sm" style="margin-left: 10px;">
+                        Edit
+                    </button>
+                    <button id="changeBtn" type="button" class="btn btn-primary btn-sm" style="margin-left: 10px;">
+                        Change Password
+                    </button>
+                    <button id="deleteBtn" type="button" class="btn btn-danger btn-sm" style="margin-left: 10px;">
+                        Delete Account
+                    </button>
+                </div>
+                <div id="editModelBtns" style="float:right; visibility:hidden;">
+                    <button id="saveBtn" type="button" class="btn btn-success btn-sm" style="margin-left: 10px;">
+                        Save
+                    </button>
+                    <button id="cancelBtn" type="button" class="btn btn-default btn-sm" style="margin-left: 10px;">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript">
+
+        $(function () {
+            enterEditSubmit();
+            editBtnEvent();
+            cancelBtnEvent();
+            changeBtnEvent();
+            deleteBtnEvent();
+        })
+
+        function enterEditSubmit() {
+            $("#loginForm .form-input").keypress(function (key_code) {
+                if (key_code.which == 13) {
+                    $("#loginBtn").click();
+                }
+            });
+        }
+
+        function editBtnEvent() {
+            $('#editBtn').click(function () {
+                document.getElementById('readOnlyBtns').style.visibility = "hidden";
+                document.getElementById('editModelBtns').style.visibility = "visible";
+                inputList = document.getElementsByClassName("form-input");
+                if (inputList) {
+                    for (var x = 0; x < inputList.length; x++) {
+                        inputList[x].disabled = false;
+                    }
+                }
+            });
+        }
+
+        function cancelBtnEvent() {
+            $('#cancelBtn').click(function () {
+                document.getElementById('readOnlyBtns').style.visibility = "visible";
+                document.getElementById('editModelBtns').style.visibility = "hidden";
+                inputList = document.getElementsByClassName("form-input");
+                if (inputList) {
+                    for (var x = 0; x < inputList.length; x++) {
+                        inputList[x].disabled = true;
+                    }
+                }
+            });
+        }
+
+
+    </script>
+{% endblock %}
+
