@@ -31,13 +31,13 @@ urlpatterns = [
 
     # Account login & logout & account creation
 
-    path('login/', account.user_login),
-    path('logout/', account.user_logout),
-    path('create/account/', account.user_create),
+    path('login/', account.account_login),
+    path('logout/', account.account_logout),
+    path('account/create/', account.account_create),
     path('image/code/', account.image_code),
 
     # User center
 
-    path('user/center/<str:uid>/', user.user_center),
+    path('user/center/', user.user_center),
 
 ]

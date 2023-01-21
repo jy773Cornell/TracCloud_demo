@@ -102,13 +102,32 @@
 <script src="{% static 'js/jquery-3.6.3.min.js' %}"></script>
 <script src="{% static 'plugins/bootstrap-3.4.1/js/bootstrap.min.js' %}"></script>
 <script type="text/javascript">
+
     $(function () {
+        enterLoginSubmit();
+        enterCreateSubmit();
         imgRefresh();
         imgClickRefreshEvent();
         loginBtnEvent();
         createBtnEvent();
         createConfirmBtn();
     })
+
+    function enterLoginSubmit() {
+        $("#loginForm .form-input").keypress(function (key_code) {
+            if (key_code.which == 13) {
+                $("#loginBtn").click();
+            }
+        });
+    }
+
+    function enterCreateSubmit() {
+        $("#createUserForm .form-input").keypress(function (key_code) {
+            if (key_code.which == 13) {
+                $("#createConfirmBtn").click();
+            }
+        });
+    }
 
     function imgRefresh() {
         var ran = Math.random();
@@ -160,7 +179,7 @@
             $(".modal .error_msg").empty();
 
             $.ajax({
-                url: "/create/account/",
+                url: "/account/create/",
                 type: "post",
                 data: $("#createUserForm").serialize(),
                 dataType: "JSON",
@@ -182,6 +201,5 @@
     }
 
 </script>
-
 </body>
 </html>

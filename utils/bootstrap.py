@@ -14,10 +14,10 @@ class BootStrap:
                 continue
 
             if field.widget.attrs:
-                field.widget.attrs["class"] = "form-control"
+                field.widget.attrs["class"] = "form-input form-control"
                 field.widget.attrs["placeholder"] = field.label
             else:
-                field.widget.attrs = {"class": "form-control", "placeholder": field.label}
+                field.widget.attrs = {"class": "form-input form-control", "placeholder": field.label}
 
 
 class BootStrapModelForm(BootStrap, forms.ModelForm):
