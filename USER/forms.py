@@ -45,8 +45,8 @@ class UserCreateModelForm(BootStrapModelForm):
     email = forms.CharField(required=True)
 
     type = forms.ModelChoiceField(
-        queryset=UserType.objects.exclude(type_name="admin").filter(is_active=True),
-        to_field_name="type_name",
+        queryset=UserType.objects.exclude(name="admin").filter(is_active=True),
+        to_field_name="name",
         empty_label=None,
         required=True,
     )

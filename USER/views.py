@@ -60,7 +60,7 @@ def user_login_submit(request):
 
             uid = user_object.uid
             username = user_object.username
-            type_name = user_object.type.type_name
+            type_name = user_object.type.name
             password = user_object.password
 
             if not check_password(form.cleaned_data["password"], password):

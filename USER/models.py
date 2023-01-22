@@ -39,7 +39,7 @@ class User(models.Model):
 
 class UserType(models.Model):
     utid = models.CharField(verbose_name="UTID", primary_key=True, max_length=48)
-    type_name = models.CharField(verbose_name="Type Name", unique=True, max_length=128)
+    name = models.CharField(verbose_name="Type Name", unique=True, max_length=128)
     info_data_table = models.CharField(verbose_name="Info Data Table", null=True, blank=True, max_length=256)
     is_active = models.BooleanField(verbose_name="Is Active", default=True)
     create_time = models.DateTimeField(verbose_name="Create Time", auto_now=True)
@@ -48,7 +48,7 @@ class UserType(models.Model):
     objects.prefix("UTID")
 
     def __str__(self):
-        return self.type_name
+        return self.name
 
 
 class UserRelation(models.Model):
@@ -73,7 +73,7 @@ class UserRelation(models.Model):
 
 class UserRelationType(models.Model):
     urtid = models.CharField(verbose_name="URTID", primary_key=True, max_length=48)
-    type_name = models.CharField(verbose_name="Type Name", unique=True, max_length=128)
+    name = models.CharField(verbose_name="Type Name", unique=True, max_length=128)
     note = models.TextField(verbose_name="Note", null=True, blank=True)
     is_active = models.BooleanField(verbose_name="Is Active", default=True)
     create_time = models.DateTimeField(verbose_name="Create Time", auto_now=True)
@@ -82,4 +82,4 @@ class UserRelationType(models.Model):
     objects.prefix("URTID")
 
     def __str__(self):
-        return self.type_name
+        return self.name

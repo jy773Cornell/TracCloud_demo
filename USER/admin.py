@@ -24,13 +24,13 @@ class UserAdmin(admin.ModelAdmin):
 
 
 class UserTypeAdmin(admin.ModelAdmin):
-    list_display = ('utid', 'type_name', 'info_data_table', 'is_active', 'create_time',)
+    list_display = ('utid', 'name', 'info_data_table', 'is_active', 'create_time',)
 
     list_filter = ('is_active',)
 
     list_per_page = 10
 
-    list_editable = ('type_name', 'info_data_table', 'is_active',)
+    list_editable = ('name', 'info_data_table', 'is_active',)
 
     exclude = ["utid"]
 
@@ -58,13 +58,13 @@ class UserRelationAdmin(admin.ModelAdmin):
 
 
 class UserRelationTypeAdmin(admin.ModelAdmin):
-    list_display = ('urtid', 'type_name', 'note', 'is_active', 'create_time',)
+    list_display = ('urtid', 'name', 'note', 'is_active', 'create_time',)
 
     list_filter = ('is_active',)
 
     list_per_page = 10
 
-    list_editable = ('type_name', 'note', 'is_active',)
+    list_editable = ('name', 'note', 'is_active',)
 
     exclude = ["urtid"]
 
