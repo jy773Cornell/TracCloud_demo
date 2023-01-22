@@ -7,7 +7,7 @@ from USER.forms import UserProfileReadOnlyModelForm, PasswordForm
 
 
 def user_center(request):
-    return render(request, "user_center_layout.html")
+    return render(request, "user_center.html")
 
 
 @csrf_exempt

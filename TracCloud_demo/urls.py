@@ -29,7 +29,7 @@ urlpatterns = [
 
     path('admin/', admin.site.urls),
 
-    # Account login & logout & account creation
+    # Account login & logout & account creation/deletion
 
     path('login/', account.account_login),
     path('login/submit/', account.account_login_submit),
@@ -38,7 +38,7 @@ urlpatterns = [
     path('account/delete/', account.account_delete),
     path('image/code/', account.image_code),
 
-    # User center
+    # User edit
 
     path('user/center/', user.user_center),
     path('user/profile/', user.user_profile),

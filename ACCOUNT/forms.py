@@ -26,7 +26,7 @@ class LoginForm(BootStrapForm):
     )
 
 
-class UserCreateForm(BootStrapModelForm):
+class UserCreateModelForm(BootStrapModelForm):
     uid = forms.CharField(required=False)
 
     password = forms.CharField(
