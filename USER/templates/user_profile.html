@@ -198,7 +198,7 @@
         function deleteConfirmBtnEvent() {
             $('#btnConfirmDelete').click(function () {
                 $.ajax({
-                    url: '/account/delete/',
+                    url: '/user/delete/',
                     type: 'post',
                     success: function (res) {
                         if (res.status) {

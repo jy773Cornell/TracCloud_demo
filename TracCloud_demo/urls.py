@@ -18,7 +18,6 @@ from django.urls import path, re_path
 from django.conf import settings
 from django.views.static import serve
 import USER.views as user
-import ACCOUNT.views as account
 
 urlpatterns = [
     # Media files
@@ -29,20 +28,17 @@ urlpatterns = [
 
     path('admin/', admin.site.urls),
 
-    # Account login & logout & account creation/deletion
+    # USER
 
-    path('login/', account.account_login),
-    path('login/submit/', account.account_login_submit),
-    path('account/create/', account.account_create),
-    path('logout/', account.account_logout),
-    path('account/delete/', account.account_delete),
-    path('image/code/', account.image_code),
-
-    # User edit
-
+    path('user/login/', user.user_login),
+    path('user/login/submit/', user.user_login_submit),
+    path('user/logout/', user.user_logout),
+    path('user/create/', user.user_create),
+    path('user/delete/', user.user_delete),
     path('user/center/', user.user_center),
     path('user/profile/', user.user_profile),
     path('user/edit/', user.user_edit),
     path('user/password/change/', user.user_password_change),
+    path('image/code/', user.image_code),
 
 ]

@@ -146,7 +146,7 @@
             $("#loginForm .error_msg").empty();
 
             $.ajax({
-                url: '/login/submit/',
+                url: '/user/login/submit/',
                 type: 'post',
                 data: $("#loginForm").serialize(),
                 dataType: "JSON",
@@ -176,7 +176,7 @@
             $(".modal .error_msg").empty();
 
             $.ajax({
-                url: "/account/create/",
+                url: "/user/create/",
                 type: "post",
                 data: $("#createUserForm").serialize(),
                 dataType: "JSON",
