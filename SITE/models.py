@@ -7,7 +7,7 @@ class Site(models.Model):
     user = models.ForeignKey(verbose_name="User", to="USER.User", to_field="uid", related_name="site_user",
                              null=True, blank=True, on_delete=models.SET_NULL)
     name = models.CharField(verbose_name="Site Name", max_length=256)
-    owner_name = models.CharField(verbose_name="Owner Name", max_length=64)
+    owner_name = models.CharField(verbose_name="Owner Name", null=True, blank=True, max_length=64)
     type = models.ForeignKey(verbose_name="Type", to="SiteType", to_field="stid", related_name="site_type",
                              null=True, blank=True, on_delete=models.SET_NULL)
     crop = models.ForeignKey(verbose_name="Crop", to="CROP.Crop", to_field="cid", related_name="site_crop",
@@ -37,8 +37,9 @@ class SiteType(models.Model):
     name = models.CharField(verbose_name="Type Name", max_length=128)
 
     level_choices = (
-        (1, "parent"),
-        (2, "child"),
+        (1, "top"),
+        (2, "middle"),
+        (3, "base"),
     )
     level = models.SmallIntegerField(verbose_name="Level", choices=level_choices)
 

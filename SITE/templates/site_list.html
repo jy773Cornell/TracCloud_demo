@@ -1,0 +1,241 @@
+{% extends "layout.html" %}
+{% block content %}'
+    <div class="container">
+        <div style="margin-bottom: 10px">
+            <a id="addBtn" type="button" class='btn btn-success'>
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> ADD Site</a>
+            <div style="float: right; width:300px;">
+                <form method="get" action="">
+                    <div class="input-group">
+                        <input type="text" name="search" class="form-control" placeholder="Search for"
+                               value="{{ search_data }}">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="submit">
+                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                            </button>
+                        </span>
+                    </div><!-- /input-group -->
+                </form>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Site List</h3>
+            </div>
+            <div class="panel-body">
+                <form id="profileForm" method="post" novalidate>
+                    <div class="row">
+                        {% for field in form %}
+                            <div class="form-group col-md-4">
+                                <label>{{ field.label }}</label>
+                                {{ field }}
+                                <span class="error_msg" style="color:red;">{{ field.errors.0 }}</span>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="modal fade" id="addSiteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="myModalLabel">Add Site</h3>
+                    </div>
+                    <div class="modal-body">
+                        <form id="topSiteForm" novalidate>
+                            <div class="row">
+                                <div class="form-group col-md-2">
+                                    <label>{{ top_site_form.type.label }}</label>
+                                    {{ top_site_form.type }}
+                                    <span class="error_msg" style="color:red;">{{ top_site_form.type.errors.0 }}</span>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>{{ top_site_form.name.label }}</label>
+                                    {{ top_site_form.name }}
+                                    <span class="error_msg" style="color:red;">{{ top_site_form.name.errors.0 }}</span>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label>{{ top_site_form.owner_name.label }}</label>
+                                    {{ top_site_form.owner_name }}
+                                    <span class="error_msg"
+                                          style="color:red;">{{ top_site_form.owner_name.errors.0 }}</span>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label>{{ top_site_form.gps.label }}</label>
+                                    {{ top_site_form.gps }}
+                                    <span class="error_msg" style="color:red;">{{ top_site_form.gps.errors.0 }}</span>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label>{{ top_site_form.gps_system.label }}</label>
+                                    {{ top_site_form.gps_system }}
+                                    <span class="error_msg"
+                                          style="color:red;">{{ top_site_form.gps_system.errors.0 }}</span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer" style="text-align: left;">
+                        <form id="topSiteForm" novalidate>
+                            <div class="row">
+                                <div class="form-group col-md-2">
+                                    <label>{{ top_site_form.type.label }}</label>
+                                    {{ top_site_form.type }}
+                                    <span class="error_msg" style="color:red;">{{ top_site_form.type.errors.0 }}</span>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label>{{ top_site_form.name.label }}</label>
+                                    {{ top_site_form.name }}
+                                    <span class="error_msg" style="color:red;">{{ top_site_form.name.errors.0 }}</span>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label>{{ top_site_form.owner_name.label }}</label>
+                                    {{ top_site_form.owner_name }}
+                                    <span class="error_msg"
+                                          style="color:red;">{{ top_site_form.owner_name.errors.0 }}</span>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label>{{ top_site_form.gps.label }}</label>
+                                    {{ top_site_form.gps }}
+                                    <span class="error_msg" style="color:red;">{{ top_site_form.gps.errors.0 }}</span>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label>{{ top_site_form.gps_system.label }}</label>
+                                    {{ top_site_form.gps_system }}
+                                    <span class="error_msg"
+                                          style="color:red;">{{ top_site_form.gps_system.errors.0 }}</span>
+                                </div>
+                            </div>
+                        </form>
+                        <form id="topSiteForm" novalidate>
+                            <div class="row">
+                                <div class="form-group col-md-2">
+                                    <label>{{ top_site_form.type.label }}</label>
+                                    {{ top_site_form.type }}
+                                    <span class="error_msg" style="color:red;">{{ top_site_form.type.errors.0 }}</span>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label>{{ top_site_form.name.label }}</label>
+                                    {{ top_site_form.name }}
+                                    <span class="error_msg" style="color:red;">{{ top_site_form.name.errors.0 }}</span>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label>{{ top_site_form.owner_name.label }}</label>
+                                    {{ top_site_form.owner_name }}
+                                    <span class="error_msg"
+                                          style="color:red;">{{ top_site_form.owner_name.errors.0 }}</span>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label>{{ top_site_form.gps.label }}</label>
+                                    {{ top_site_form.gps }}
+                                    <span class="error_msg" style="color:red;">{{ top_site_form.gps.errors.0 }}</span>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label>{{ top_site_form.gps_system.label }}</label>
+                                    {{ top_site_form.gps_system }}
+                                    <span class="error_msg"
+                                          style="color:red;">{{ top_site_form.gps_system.errors.0 }}</span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="changeConfirmBtn" type="button" class="btn btn-primary">Confirm</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript">
+
+        $(function () {
+            enterEditSubmit();
+            enterChangeSubmit();
+            addBtnEvent();
+            editCancelBtnEvent();
+            editSaveBtnEvent();
+            deleteBtnEvent();
+            deleteConfirmBtnEvent();
+        })
+
+        function enterEditSubmit() {
+            $("#profileForm .form-input").keypress(function (key_code) {
+                if (key_code.which == 13) {
+                    $("#editSaveBtn").click();
+                }
+            });
+        }
+
+        function enterChangeSubmit() {
+            $("#changePasswordForm .form-input").keypress(function (key_code) {
+                if (key_code.which == 13) {
+                    $("#changeConfirmBtn").click();
+                }
+            });
+        }
+
+        function addBtnEvent() {
+            $('#addBtn').click(function () {
+                $('#addSiteModal').modal("show");
+            });
+        }
+
+        function editCancelBtnEvent() {
+            $('#editCancelBtn').click(function () {
+                location.reload();
+            });
+        }
+
+        function editSaveBtnEvent() {
+            $('#editSaveBtn').click(function () {
+
+                $("#profileForm .error_msg").empty();
+
+                $.ajax({
+                    url: '/user/edit/',
+                    type: 'post',
+                    data: $("#profileForm").serialize(),
+                    dataType: "JSON",
+                    success: function (res) {
+                        if (res.status) {
+                            location.href = res.url;
+                        } else {
+                            $.each(res.errors, function (name, data) {
+                                $("#id_" + name).next().text(data[0])
+                            })
+                        }
+                    }
+                })
+            });
+        }
+
+        function deleteBtnEvent() {
+            $('#deleteBtn').click(function () {
+                $('#deleteModal').modal("show");
+            });
+        }
+
+        function deleteConfirmBtnEvent() {
+            $('#btnConfirmDelete').click(function () {
+                $.ajax({
+                    url: '/user/delete/',
+                    type: 'post',
+                    success: function (res) {
+                        if (res.status) {
+                            location.href = res.url;
+                        } else {
+                            alert(res.errors);
+                            location.reload();
+                        }
+                    }
+                })
+            });
+        }
+
+    </script>
+{% endblock %}
+

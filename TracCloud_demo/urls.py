@@ -18,6 +18,7 @@ from django.urls import path, re_path
 from django.conf import settings
 from django.views.static import serve
 import USER.views as user
+import SITE.views as site
 
 urlpatterns = [
     # Media files
@@ -40,5 +41,9 @@ urlpatterns = [
     path('user/edit/', user.user_edit),
     path('user/password/change/', user.user_password_change),
     path('image/code/', user.image_code),
+
+    # SITE
+
+    path('site/list/', site.site_list),
 
 ]
