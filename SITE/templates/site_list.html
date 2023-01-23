@@ -46,12 +46,12 @@
                         <form id="topSiteForm" novalidate>
                             <div class="row">
                                 <div class="form-group col-md-2">
-                                    <label>{{ top_site_form.type.label }}</label>
+                                    <label>Site Type</label>
                                     {{ top_site_form.type }}
                                     <span class="error_msg" style="color:red;">{{ top_site_form.type.errors.0 }}</span>
                                 </div>
                                 <div class="form-group col-md-4">
-                                    <label>{{ top_site_form.name.label }}</label>
+                                    <label>Name</label>
                                     {{ top_site_form.name }}
                                     <span class="error_msg" style="color:red;">{{ top_site_form.name.errors.0 }}</span>
                                 </div>
@@ -75,70 +75,7 @@
                             </div>
                         </form>
                     </div>
-                    <div class="modal-footer" style="text-align: left;">
-                        <form id="topSiteForm" novalidate>
-                            <div class="row">
-                                <div class="form-group col-md-2">
-                                    <label>{{ top_site_form.type.label }}</label>
-                                    {{ top_site_form.type }}
-                                    <span class="error_msg" style="color:red;">{{ top_site_form.type.errors.0 }}</span>
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label>{{ top_site_form.name.label }}</label>
-                                    {{ top_site_form.name }}
-                                    <span class="error_msg" style="color:red;">{{ top_site_form.name.errors.0 }}</span>
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label>{{ top_site_form.owner_name.label }}</label>
-                                    {{ top_site_form.owner_name }}
-                                    <span class="error_msg"
-                                          style="color:red;">{{ top_site_form.owner_name.errors.0 }}</span>
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label>{{ top_site_form.gps.label }}</label>
-                                    {{ top_site_form.gps }}
-                                    <span class="error_msg" style="color:red;">{{ top_site_form.gps.errors.0 }}</span>
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label>{{ top_site_form.gps_system.label }}</label>
-                                    {{ top_site_form.gps_system }}
-                                    <span class="error_msg"
-                                          style="color:red;">{{ top_site_form.gps_system.errors.0 }}</span>
-                                </div>
-                            </div>
-                        </form>
-                        <form id="topSiteForm" novalidate>
-                            <div class="row">
-                                <div class="form-group col-md-2">
-                                    <label>{{ top_site_form.type.label }}</label>
-                                    {{ top_site_form.type }}
-                                    <span class="error_msg" style="color:red;">{{ top_site_form.type.errors.0 }}</span>
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label>{{ top_site_form.name.label }}</label>
-                                    {{ top_site_form.name }}
-                                    <span class="error_msg" style="color:red;">{{ top_site_form.name.errors.0 }}</span>
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label>{{ top_site_form.owner_name.label }}</label>
-                                    {{ top_site_form.owner_name }}
-                                    <span class="error_msg"
-                                          style="color:red;">{{ top_site_form.owner_name.errors.0 }}</span>
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label>{{ top_site_form.gps.label }}</label>
-                                    {{ top_site_form.gps }}
-                                    <span class="error_msg" style="color:red;">{{ top_site_form.gps.errors.0 }}</span>
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label>{{ top_site_form.gps_system.label }}</label>
-                                    {{ top_site_form.gps_system }}
-                                    <span class="error_msg"
-                                          style="color:red;">{{ top_site_form.gps_system.errors.0 }}</span>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+
                     <div class="modal-footer">
                         <button id="changeConfirmBtn" type="button" class="btn btn-primary">Confirm</button>
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -151,15 +88,12 @@
 
 {% block js %}
     <script type="text/javascript">
-
         $(function () {
             enterEditSubmit();
-            enterChangeSubmit();
             addBtnEvent();
+            topSiteTypeChangeEvent();
             editCancelBtnEvent();
             editSaveBtnEvent();
-            deleteBtnEvent();
-            deleteConfirmBtnEvent();
         })
 
         function enterEditSubmit() {
@@ -170,17 +104,36 @@
             });
         }
 
-        function enterChangeSubmit() {
-            $("#changePasswordForm .form-input").keypress(function (key_code) {
-                if (key_code.which == 13) {
-                    $("#changeConfirmBtn").click();
-                }
-            });
-        }
-
         function addBtnEvent() {
             $('#addBtn').click(function () {
                 $('#addSiteModal').modal("show");
+            });
+        }
+
+        function topSiteTypeChangeEvent() {
+            $('#topSiteForm #id_type').change(function () {
+                $.ajax({
+                    url: '/site/top/type/change/',
+                    type: 'post',
+                    data: {
+                        top_site: $("#topSiteForm #id_type").val()
+                    },
+                    dataType: "JSON",
+                    success: function (res) {
+                        if (res.status) {
+                            var html = "";
+                            for (var i = 0; i < res.data.length; i++) {
+                                html += "<option value='" + res.data[i] + "'>" + res.data[i] + "</option>";
+                            }
+                            $("#midSiteForm #id_type").html(html);
+                            alert($("[name='search']").html())
+                        } else {
+                            $.each(res.errors, function (name, data) {
+                                $("#id_" + name).next().text(data[0])
+                            })
+                        }
+                    }
+                })
             });
         }
 
@@ -213,28 +166,6 @@
             });
         }
 
-        function deleteBtnEvent() {
-            $('#deleteBtn').click(function () {
-                $('#deleteModal').modal("show");
-            });
-        }
-
-        function deleteConfirmBtnEvent() {
-            $('#btnConfirmDelete').click(function () {
-                $.ajax({
-                    url: '/user/delete/',
-                    type: 'post',
-                    success: function (res) {
-                        if (res.status) {
-                            location.href = res.url;
-                        } else {
-                            alert(res.errors);
-                            location.reload();
-                        }
-                    }
-                })
-            });
-        }
 
     </script>
 {% endblock %}

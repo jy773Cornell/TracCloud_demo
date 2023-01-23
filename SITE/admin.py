@@ -22,13 +22,13 @@ class SiteAdmin(admin.ModelAdmin):
 
 
 class SiteTypeAdmin(admin.ModelAdmin):
-    list_display = ('stid', 'name', 'level', 'note', 'is_active', 'create_time',)
+    list_display = ('stid', 'name', 'level', 'parent_type', 'is_active', 'create_time',)
 
     list_filter = ('level', 'is_active',)
 
     list_per_page = 10
 
-    list_editable = ('name', 'note', 'is_active',)
+    list_editable = ('name', 'is_active',)
 
     exclude = ["stid"]
 
@@ -39,13 +39,13 @@ class SiteTypeAdmin(admin.ModelAdmin):
 
 
 class SiteUnitAdmin(admin.ModelAdmin):
-    list_display = ('suid', 'unit', 'note', 'is_active', 'create_time',)
+    list_display = ('suid', 'unit', 'is_active', 'create_time',)
 
     list_filter = ('is_active',)
 
     list_per_page = 10
 
-    list_editable = ('unit', 'note', 'is_active',)
+    list_editable = ('unit', 'is_active',)
 
     exclude = ["suid"]
 
@@ -56,13 +56,13 @@ class SiteUnitAdmin(admin.ModelAdmin):
 
 
 class SiteVarietyAdmin(admin.ModelAdmin):
-    list_display = ('svid', 'name', 'note', 'is_active', 'create_time',)
+    list_display = ('svid', 'name', 'is_active', 'create_time',)
 
     list_filter = ('is_active',)
 
     list_per_page = 10
 
-    list_editable = ('name', 'note', 'is_active',)
+    list_editable = ('name', 'is_active',)
 
     exclude = ["svid"]
 

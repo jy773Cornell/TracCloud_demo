@@ -34,7 +34,7 @@ class Site(models.Model):
 
 class SiteType(models.Model):
     stid = models.CharField(verbose_name="STID", primary_key=True, max_length=48)
-    name = models.CharField(verbose_name="Type Name", max_length=128)
+    name = models.CharField(verbose_name="Type Name", unique=True, max_length=128)
 
     level_choices = (
         (1, "top"),
@@ -43,6 +43,8 @@ class SiteType(models.Model):
     )
     level = models.SmallIntegerField(verbose_name="Level", choices=level_choices)
 
+    parent_type = models.ForeignKey(verbose_name="Parent Site Type", to="SiteType", to_field="stid",
+                                    related_name="st_st", null=True, blank=True, on_delete=models.SET_NULL)
     note = models.TextField(verbose_name="Note", null=True, blank=True)
     is_active = models.BooleanField(verbose_name="Is Active", default=True)
     create_time = models.DateTimeField(verbose_name="Create Time", auto_now=True)
@@ -56,7 +58,7 @@ class SiteType(models.Model):
 
 class SiteUnit(models.Model):
     suid = models.CharField(verbose_name="SUID", primary_key=True, max_length=48)
-    unit = models.CharField(verbose_name="Unit", max_length=32)
+    unit = models.CharField(verbose_name="Unit", unique=True, max_length=32)
     note = models.TextField(verbose_name="Note", null=True, blank=True)
     is_active = models.BooleanField(verbose_name="Is Active", default=True)
     create_time = models.DateTimeField(verbose_name="Create Time", auto_now=True)
@@ -70,7 +72,7 @@ class SiteUnit(models.Model):
 
 class SiteVariety(models.Model):
     svid = models.CharField(verbose_name="SVID", primary_key=True, max_length=48)
-    name = models.CharField(verbose_name="Variety Name", max_length=32)
+    name = models.CharField(verbose_name="Variety Name", unique=True, max_length=32)
     note = models.TextField(verbose_name="Note", null=True, blank=True)
     is_active = models.BooleanField(verbose_name="Is Active", default=True)
     create_time = models.DateTimeField(verbose_name="Create Time", auto_now=True)

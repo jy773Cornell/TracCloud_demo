@@ -45,5 +45,6 @@ urlpatterns = [
     # SITE
 
     path('site/list/', site.site_list),
+    path('site/top/type/change/', site.site_top_type_change),
 
 ]

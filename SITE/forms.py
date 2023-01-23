@@ -14,7 +14,51 @@ class TopSiteModelForm(BootStrapModelForm):
     user = forms.CharField(required=False)
 
     type = forms.ModelChoiceField(
+        queryset=SiteType.objects.filter(level=1, is_active=True),
+        to_field_name="name",
+        required=True,
+    )
+
+    class Meta:
+        model = Site
+        fields = ["sid", "user", "type", "name", "owner_name", "gps", "gps_system"]
+
+    def clean_sid(self):
+        return gen_uuid("SID")
+
+
+class MiddleSiteModelForm(BootStrapModelForm):
+    sid = forms.CharField(required=False)
+
+    user = forms.CharField(required=False)
+
+    parent_type = forms.CharField(required=False)
+
+    type = forms.ModelChoiceField(
         queryset=SiteType.objects.filter(level=2, is_active=True),
+        to_field_name="name",
+        required=True,
+    )
+
+    class Meta:
+        model = Site
+        fields = ["sid", "user", "type", "name", "parent_type"]
+
+    def clean_sid(self):
+        return gen_uuid("SID")
+
+
+class BaseSiteModelForm(BootStrapModelForm):
+    sid = forms.CharField(required=False)
+
+    user = forms.CharField(required=False)
+
+    size = forms.FloatField(required=True)
+
+    size_unit = forms.CharField(required=True)
+
+    type = forms.ModelChoiceField(
+        queryset=SiteType.objects.filter(level=3, is_active=True),
         to_field_name="name",
         empty_label=None,
         required=True,
@@ -22,7 +66,7 @@ class TopSiteModelForm(BootStrapModelForm):
 
     class Meta:
         model = Site
-        fields = ["sid", "user", "name", "type", "owner_name", "gps", "gps_system"]
+        fields = ["sid", "user", "crop", "crop_year", "type", "name", "size", "size_unit"]
 
     def clean_sid(self):
         return gen_uuid("SID")
