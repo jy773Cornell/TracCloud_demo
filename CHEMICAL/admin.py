@@ -16,7 +16,7 @@ class ChemicalAdmin(admin.ModelAdmin):
 
     def save_model(self, request, obj, form, change):
         if not change:
-            obj.cid = gen_uuid("ChemID")
+            obj.chemid = gen_uuid("ChemID")
         super().save_model(request, obj, form, change)
 
 
@@ -33,7 +33,7 @@ class ChemicalTypeAdmin(admin.ModelAdmin):
 
     def save_model(self, request, obj, form, change):
         if not change:
-            obj.ccid = gen_uuid("ChemTID")
+            obj.chemtid = gen_uuid("ChemTID")
         super().save_model(request, obj, form, change)
 
 
@@ -50,7 +50,7 @@ class ChemicalUnitAdmin(admin.ModelAdmin):
 
     def save_model(self, request, obj, form, change):
         if not change:
-            obj.clcid = gen_uuid("ChemUID")
+            obj.chemuid = gen_uuid("ChemUID")
         super().save_model(request, obj, form, change)
 
 

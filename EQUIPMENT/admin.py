@@ -16,7 +16,7 @@ class EquipmentAdmin(admin.ModelAdmin):
 
     def save_model(self, request, obj, form, change):
         if not change:
-            obj.cid = gen_uuid("EID")
+            obj.eid = gen_uuid("EID")
         super().save_model(request, obj, form, change)
 
 
@@ -33,7 +33,7 @@ class EquipmentTypeAdmin(admin.ModelAdmin):
 
     def save_model(self, request, obj, form, change):
         if not change:
-            obj.cid = gen_uuid("ETID")
+            obj.etid = gen_uuid("ETID")
         super().save_model(request, obj, form, change)
 
 

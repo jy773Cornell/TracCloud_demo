@@ -22,7 +22,7 @@ class MyModelManager(BaseManager.from_queryset(MyQuerySet)):
     def create(self, **obj_data):
         # Create UUID with prefix as the primary key
 
-        obj_data[self.prefix] = gen_uuid(self.prefix)
+        obj_data[self.prefix.lower()] = gen_uuid(self.prefix)
 
         # Call the super method which does the actual creation
 

@@ -17,7 +17,7 @@ class SiteAdmin(admin.ModelAdmin):
 
     def save_model(self, request, obj, form, change):
         if not change:
-            obj.cid = gen_uuid("SID")
+            obj.sid = gen_uuid("SID")
         super().save_model(request, obj, form, change)
 
 
@@ -34,7 +34,7 @@ class SiteTypeAdmin(admin.ModelAdmin):
 
     def save_model(self, request, obj, form, change):
         if not change:
-            obj.cid = gen_uuid("STID")
+            obj.stid = gen_uuid("STID")
         super().save_model(request, obj, form, change)
 
 
@@ -51,7 +51,7 @@ class SiteUnitAdmin(admin.ModelAdmin):
 
     def save_model(self, request, obj, form, change):
         if not change:
-            obj.cid = gen_uuid("SUID")
+            obj.suid = gen_uuid("SUID")
         super().save_model(request, obj, form, change)
 
 
@@ -68,7 +68,7 @@ class SiteVarietyAdmin(admin.ModelAdmin):
 
     def save_model(self, request, obj, form, change):
         if not change:
-            obj.cid = gen_uuid("SVID")
+            obj.svid = gen_uuid("SVID")
         super().save_model(request, obj, form, change)
 
 
