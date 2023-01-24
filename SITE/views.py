@@ -16,9 +16,11 @@ def site_list(request):
     if request.method == "GET":
         top_site_form = TopSiteModelForm()
         mid_site_form = MiddleSiteModelForm()
+        base_site_form = BaseSiteModelForm()
         context = {
             "top_site_form": top_site_form,
             "mid_site_form": mid_site_form,
+            "base_site_form": base_site_form,
         }
         return render(request, "site_list.html", context)
 
@@ -29,6 +31,7 @@ def site_top_type_change(request):
         top_site = request.POST["top_site"]
         parent_stid = SiteType.objects.filter(name=top_site, is_active=True).first().stid
         mid_site_objects = SiteType.objects.filter(parent_type_id=parent_stid, is_active=True)
+
         site_list = []
         for mid_site in mid_site_objects:
             site_list.append(mid_site.name)

@@ -55,8 +55,6 @@ class BaseSiteModelForm(BootStrapModelForm):
 
     size = forms.FloatField(required=True)
 
-    size_unit = forms.CharField(required=True)
-
     type = forms.ModelChoiceField(
         queryset=SiteType.objects.filter(level=3, is_active=True),
         to_field_name="name",
