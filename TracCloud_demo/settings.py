@@ -82,11 +82,11 @@ WSGI_APPLICATION = 'TracCloud_demo.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'TracCloud',
-        'USER': 'postgres',
-        'PASSWORD': 'traccloud',
-        'HOST': '127.0.0.1',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'yjinhong0226/TracCloud',
+        'USER': 'yjinhong0226',
+        'PASSWORD': 'v2_3yL3U_PP27vLRBy6KP9bVizrWYpzV',
+        'HOST': 'db.bit.io',
         'PORT': '5432',
     }
 }
@@ -137,4 +137,4 @@ MEDIA_URL = "/media/"
 
 # Override the admin logout url
 
-LOGOUT_REDIRECT_URL = '/logout/'
+LOGOUT_REDIRECT_URL = '/user/logout/'

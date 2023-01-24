@@ -2,7 +2,7 @@
 {% block content %}'
     <div class="container">
         <div style="margin-bottom: 10px">
-            <a id="addBtn" type="button" class='btn btn-success'>
+            <a id="addSiteBtn" type="button" class='btn btn-success'>
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> ADD Site</a>
             <div style="float: right; width:300px;">
                 <form method="get" action="">
@@ -14,7 +14,7 @@
                                 <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                             </button>
                         </span>
-                    </div><!-- /input-group -->
+                    </div>
                 </form>
             </div>
         </div>
@@ -23,17 +23,7 @@
                 <h3 class="panel-title">Site List</h3>
             </div>
             <div class="panel-body">
-                <form id="profileForm" method="post" novalidate>
-                    <div class="row">
-                        {% for field in form %}
-                            <div class="form-group col-md-4">
-                                <label>{{ field.label }}</label>
-                                {{ field }}
-                                <span class="error_msg" style="color:red;">{{ field.errors.0 }}</span>
-                            </div>
-                        {% endfor %}
-                    </div>
-                </form>
+
             </div>
         </div>
         <div class="modal fade" id="addSiteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -79,71 +69,73 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="modal-footer subSite" style="text-align: left;">
-                            <form class="midSiteForm" novalidate style="visibility: hidden;">
-                                <div class="row">
-                                    <div class="form-group col-md-2">
-                                        <label>Type</label>
-                                        {{ mid_site_form.type }}
-                                        <span class="error_msg"
-                                              style="color:red;">{{ mid_site_form.type.errors.0 }}</span>
+                        <div class="subSite">
+                            <div class="modal-footer" style="text-align: left;">
+                                <form class="midSiteForm" novalidate style="visibility: hidden;">
+                                    <div class="row">
+                                        <div class="form-group col-md-2">
+                                            <label>Type</label>
+                                            {{ mid_site_form.type }}
+                                            <span class="error_msg"
+                                                  style="color:red;">{{ mid_site_form.type.errors.0 }}</span>
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <label>Name</label>
+                                            {{ mid_site_form.name }}
+                                            <span class="error_msg"
+                                                  style="color:red;">{{ mid_site_form.name.errors.0 }}</span>
+                                        </div>
                                     </div>
-                                    <div class="form-group col-md-2">
-                                        <label>Name</label>
-                                        {{ mid_site_form.name }}
-                                        <span class="error_msg"
-                                              style="color:red;">{{ mid_site_form.name.errors.0 }}</span>
-                                    </div>
-                                    <button id="changeConfirmBtn" type="button" class="btn btn-primary btn-sm"
+                                    <button type="button" class="addBaseSiteBtn btn btn-primary btn-sm"
                                             style="margin-top: 25px;margin-left: 10px;">add
                                     </button>
-                                </div>
-                            </form>
-                            <form class="baseSiteForm" novalidate style="visibility: hidden;">
-                                <div class="row">
-                                    <div class="form-group col-md-2">
-                                        <label>Crop</label>
-                                        {{ base_site_form.crop }}
-                                        <span class="error_msg"
-                                              style="color:red;">{{ base_site_form.crop.errors.0 }}</span>
+                                </form>
+                                <form class="baseSiteForm" novalidate style="visibility: hidden;">
+                                    <div class="row">
+                                        <div class="form-group col-md-2">
+                                            <label>Crop</label>
+                                            {{ base_site_form.crop }}
+                                            <span class="error_msg"
+                                                  style="color:red;">{{ base_site_form.crop.errors.0 }}</span>
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <label>Crop Year</label>
+                                            {{ base_site_form.crop_year }}
+                                            <span class="error_msg"
+                                                  style="color:red;">{{ base_site_form.crop_year.errors.0 }}</span>
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <label>Type</label>
+                                            {{ base_site_form.type }}
+                                            <span class="error_msg"
+                                                  style="color:red;">{{ base_site_form.type.errors.0 }}</span>
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <label>Name</label>
+                                            {{ base_site_form.name }}
+                                            <span class="error_msg"
+                                                  style="color:red;">{{ base_site_form.name.errors.0 }}</span>
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <label>Size</label>
+                                            {{ base_site_form.size }}
+                                            <span class="error_msg"
+                                                  style="color:red;">{{ base_site_form.size.errors.0 }}</span>
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <label>Size Unit</label>
+                                            {{ base_site_form.size_unit }}
+                                            <span class="error_msg"
+                                                  style="color:red;">{{ base_site_form.size_unit.errors.0 }}</span>
+                                        </div>
                                     </div>
-                                    <div class="form-group col-md-2">
-                                        <label>Crop Year</label>
-                                        {{ base_site_form.crop_year }}
-                                        <span class="error_msg"
-                                              style="color:red;">{{ base_site_form.crop_year.errors.0 }}</span>
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        <label>Type</label>
-                                        {{ base_site_form.type }}
-                                        <span class="error_msg"
-                                              style="color:red;">{{ base_site_form.type.errors.0 }}</span>
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        <label>Name</label>
-                                        {{ base_site_form.name }}
-                                        <span class="error_msg"
-                                              style="color:red;">{{ base_site_form.name.errors.0 }}</span>
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        <label>Size</label>
-                                        {{ base_site_form.size }}
-                                        <span class="error_msg"
-                                              style="color:red;">{{ base_site_form.size.errors.0 }}</span>
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        <label>Size Unit</label>
-                                        {{ base_site_form.size_unit }}
-                                        <span class="error_msg"
-                                              style="color:red;">{{ base_site_form.size_unit.errors.0 }}</span>
-                                    </div>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button id="addSubSiteBtn" type="button" class="btn btn-primary">Confirm</button>
-                        <button id="changeConfirmBtn" type="button" class="btn btn-success">Confirm</button>
+                        <button id="addSubSiteBtn" type="button" class="btn btn-primary">Add Sub-Site</button>
+                        <button id="saveBtn" type="button" class="btn btn-success">Save</button>
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                 </div>
@@ -155,24 +147,13 @@
 {% block js %}
     <script type="text/javascript">
         $(function () {
-            enterEditSubmit();
-            addBtnEvent();
+            addSiteBtnEvent();
             topSiteTypeChangeEvent();
             addSubSiteBtnEvent()
-            editCancelBtnEvent();
-            editSaveBtnEvent();
         })
 
-        function enterEditSubmit() {
-            $("#profileForm .form-input").keypress(function (key_code) {
-                if (key_code.which == 13) {
-                    $("#editSaveBtn").click();
-                }
-            });
-        }
-
-        function addBtnEvent() {
-            $('#addBtn').click(function () {
+        function addSiteBtnEvent() {
+            $('#addSiteBtn').click(function () {
                 $('#addSiteModal').modal("show");
             });
         }
@@ -206,52 +187,21 @@
             });
         }
 
-
         function addBaseSiteBtnEvent() {
-            $('#addBtn').click(function () {
-                $('#addSiteModal').modal("show");
+            $('.addBaseSiteBtn').click(function () {
+                $('addBaseSiteBtn').parent().parent()
             });
         }
 
         function addSubSiteBtnEvent() {
             $('#addSubSiteBtn').click(function () {
-                {#alert($(".subSite").html());#}
-                var node=document.getElementById("siteForms").lastChild;
-
-                alert(node);
-                document.getElementById("siteForms").appendChild(node)
+                var html = $(".subSite").html();
+                let new_sub_site = document.createElement('div');
+                new_sub_site.classList.add('subSite');
+                new_sub_site.innerHTML = html;
+                document.getElementById("siteForms").appendChild(new_sub_site)
             });
         }
-
-        function editCancelBtnEvent() {
-            $('#editCancelBtn').click(function () {
-                location.reload();
-            });
-        }
-
-        function editSaveBtnEvent() {
-            $('#editSaveBtn').click(function () {
-
-                $("#profileForm .error_msg").empty();
-
-                $.ajax({
-                    url: '/user/edit/',
-                    type: 'post',
-                    data: $("#profileForm").serialize(),
-                    dataType: "JSON",
-                    success: function (res) {
-                        if (res.status) {
-                            location.href = res.url;
-                        } else {
-                            $.each(res.errors, function (name, data) {
-                                $("#id_" + name).next().text(data[0])
-                            })
-                        }
-                    }
-                })
-            });
-        }
-
 
     </script>
 {% endblock %}

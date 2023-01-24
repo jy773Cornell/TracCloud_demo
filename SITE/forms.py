@@ -1,4 +1,3 @@
-import requests
 from django import forms
 from django.core.validators import ValidationError
 from django.contrib.auth.hashers import check_password, make_password
