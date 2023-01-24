@@ -42,91 +42,108 @@
                     <div class="modal-header">
                         <h3 class="modal-title" id="myModalLabel">Add Site</h3>
                     </div>
-                    <div class="modal-body">
-                        <form class="topSiteForm" novalidate>
-                            <div class="row">
-                                <div class="form-group col-md-2">
-                                    <label>Site Type</label>
-                                    {{ top_site_form.type }}
-                                    <span class="error_msg" style="color:red;">{{ top_site_form.type.errors.0 }}</span>
+                    <div id="siteForms">
+                        <div class="modal-body">
+                            <form class="topSiteForm" novalidate>
+                                <div class="row">
+                                    <div class="form-group col-md-2">
+                                        <label>Site Type</label>
+                                        {{ top_site_form.type }}
+                                        <span class="error_msg"
+                                              style="color:red;">{{ top_site_form.type.errors.0 }}</span>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label>Site Name</label>
+                                        {{ top_site_form.name }}
+                                        <span class="error_msg"
+                                              style="color:red;">{{ top_site_form.name.errors.0 }}</span>
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <label>Owner Name</label>
+                                        {{ top_site_form.owner_name }}
+                                        <span class="error_msg"
+                                              style="color:red;">{{ top_site_form.owner_name.errors.0 }}</span>
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <label>GPS</label>
+                                        {{ top_site_form.gps }}
+                                        <span class="error_msg"
+                                              style="color:red;">{{ top_site_form.gps.errors.0 }}</span>
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <label>GPS System</label>
+                                        {{ top_site_form.gps_system }}
+                                        <span class="error_msg"
+                                              style="color:red;">{{ top_site_form.gps_system.errors.0 }}</span>
+                                    </div>
                                 </div>
-                                <div class="form-group col-md-4">
-                                    <label>Site Name</label>
-                                    {{ top_site_form.name }}
-                                    <span class="error_msg" style="color:red;">{{ top_site_form.name.errors.0 }}</span>
+                            </form>
+                        </div>
+                        <div class="modal-footer subSite" style="text-align: left;">
+                            <form class="midSiteForm" novalidate style="visibility: hidden;">
+                                <div class="row">
+                                    <div class="form-group col-md-2">
+                                        <label>Type</label>
+                                        {{ mid_site_form.type }}
+                                        <span class="error_msg"
+                                              style="color:red;">{{ mid_site_form.type.errors.0 }}</span>
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <label>Name</label>
+                                        {{ mid_site_form.name }}
+                                        <span class="error_msg"
+                                              style="color:red;">{{ mid_site_form.name.errors.0 }}</span>
+                                    </div>
+                                    <button id="changeConfirmBtn" type="button" class="btn btn-primary btn-sm"
+                                            style="margin-top: 25px;margin-left: 10px;">add
+                                    </button>
                                 </div>
-                                <div class="form-group col-md-2">
-                                    <label>Owner Name</label>
-                                    {{ top_site_form.owner_name }}
-                                    <span class="error_msg"
-                                          style="color:red;">{{ top_site_form.owner_name.errors.0 }}</span>
+                            </form>
+                            <form class="baseSiteForm" novalidate style="visibility: hidden;">
+                                <div class="row">
+                                    <div class="form-group col-md-2">
+                                        <label>Crop</label>
+                                        {{ base_site_form.crop }}
+                                        <span class="error_msg"
+                                              style="color:red;">{{ base_site_form.crop.errors.0 }}</span>
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <label>Crop Year</label>
+                                        {{ base_site_form.crop_year }}
+                                        <span class="error_msg"
+                                              style="color:red;">{{ base_site_form.crop_year.errors.0 }}</span>
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <label>Type</label>
+                                        {{ base_site_form.type }}
+                                        <span class="error_msg"
+                                              style="color:red;">{{ base_site_form.type.errors.0 }}</span>
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <label>Name</label>
+                                        {{ base_site_form.name }}
+                                        <span class="error_msg"
+                                              style="color:red;">{{ base_site_form.name.errors.0 }}</span>
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <label>Size</label>
+                                        {{ base_site_form.size }}
+                                        <span class="error_msg"
+                                              style="color:red;">{{ base_site_form.size.errors.0 }}</span>
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <label>Size Unit</label>
+                                        {{ base_site_form.size_unit }}
+                                        <span class="error_msg"
+                                              style="color:red;">{{ base_site_form.size_unit.errors.0 }}</span>
+                                    </div>
                                 </div>
-                                <div class="form-group col-md-2">
-                                    <label>GPS</label>
-                                    {{ top_site_form.gps }}
-                                    <span class="error_msg" style="color:red;">{{ top_site_form.gps.errors.0 }}</span>
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label>GPS System</label>
-                                    {{ top_site_form.gps_system }}
-                                    <span class="error_msg"
-                                          style="color:red;">{{ top_site_form.gps_system.errors.0 }}</span>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer" style="text-align: left;">
-                        <form class="midSiteForm" novalidate style="visibility: hidden;">
-                            <div class="row">
-                                <div class="form-group col-md-2">
-                                    <label>Type</label>
-                                    {{ mid_site_form.type }}
-                                    <span class="error_msg" style="color:red;">{{ mid_site_form.type.errors.0 }}</span>
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label>Name</label>
-                                    {{ mid_site_form.name }}
-                                    <span class="error_msg" style="color:red;">{{ mid_site_form.name.errors.0 }}</span>
-                                </div>
-                            </div>
-                        </form>
-                        <form class="baseSiteForm" novalidate style="visibility: hidden;">
-                            <div class="row">
-                                <div class="form-group col-md-2">
-                                    <label>Crop</label>
-                                    {{ base_site_form.crop }}
-                                    <span class="error_msg" style="color:red;">{{ base_site_form.crop.errors.0 }}</span>
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label>Crop Year</label>
-                                    {{ base_site_form.crop_year }}
-                                    <span class="error_msg" style="color:red;">{{ base_site_form.crop_year.errors.0 }}</span>
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label>Type</label>
-                                    {{ base_site_form.type }}
-                                    <span class="error_msg" style="color:red;">{{ base_site_form.type.errors.0 }}</span>
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label>Name</label>
-                                    {{ base_site_form.name }}
-                                    <span class="error_msg" style="color:red;">{{ base_site_form.name.errors.0 }}</span>
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label>Size</label>
-                                    {{ base_site_form.size }}
-                                    <span class="error_msg" style="color:red;">{{ base_site_form.size.errors.0 }}</span>
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label>Size Unit</label>
-                                    {{ base_site_form.size_unit }}
-                                    <span class="error_msg" style="color:red;">{{ base_site_form.size_unit.errors.0 }}</span>
-                                </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
                     <div class="modal-footer">
-                        <button id="changeConfirmBtn" type="button" class="btn btn-primary">Confirm</button>
+                        <button id="addSubSiteBtn" type="button" class="btn btn-primary">Confirm</button>
+                        <button id="changeConfirmBtn" type="button" class="btn btn-success">Confirm</button>
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                 </div>
@@ -141,6 +158,7 @@
             enterEditSubmit();
             addBtnEvent();
             topSiteTypeChangeEvent();
+            addSubSiteBtnEvent()
             editCancelBtnEvent();
             editSaveBtnEvent();
         })
@@ -178,7 +196,6 @@
                                 html += "<option value='" + res.data[i] + "'>" + res.data[i] + "</option>";
                             }
                             $(".midSiteForm #id_type").html(html);
-                            alert($(".midSiteForm").html());
                         } else {
                             $.each(res.errors, function (name, data) {
                                 $("#id_" + name).next().text(data[0])
@@ -186,6 +203,23 @@
                         }
                     }
                 })
+            });
+        }
+
+
+        function addBaseSiteBtnEvent() {
+            $('#addBtn').click(function () {
+                $('#addSiteModal').modal("show");
+            });
+        }
+
+        function addSubSiteBtnEvent() {
+            $('#addSubSiteBtn').click(function () {
+                {#alert($(".subSite").html());#}
+                var node=document.getElementById("siteForms").lastChild;
+
+                alert(node);
+                document.getElementById("siteForms").appendChild(node)
             });
         }
 
