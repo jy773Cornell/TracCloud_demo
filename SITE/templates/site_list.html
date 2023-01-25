@@ -74,7 +74,7 @@
                                 <form class="midSiteForm" novalidate style="visibility: hidden;">
                                     <div class="row">
                                         <div class="form-group col-md-2">
-                                            <label>Type</label>
+                                            <label>Sub-Site Type</label>
                                             {{ mid_site_form.type }}
                                             <span class="error_msg"
                                                   style="color:red;">{{ mid_site_form.type.errors.0 }}</span>
@@ -85,10 +85,10 @@
                                             <span class="error_msg"
                                                   style="color:red;">{{ mid_site_form.name.errors.0 }}</span>
                                         </div>
+                                        <button type="button" class="addBaseSiteBtn btn btn-primary btn-sm"
+                                                style="margin-top: 25px;margin-left: 10px;">add
+                                        </button>
                                     </div>
-                                    <button type="button" class="addBaseSiteBtn btn btn-primary btn-sm"
-                                            style="margin-top: 25px;margin-left: 10px;">add
-                                    </button>
                                 </form>
                                 <form class="baseSiteForm" novalidate style="visibility: hidden;">
                                     <div class="row">
